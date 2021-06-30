@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .title {
+        text-align: center;
+        height: 60px;
+
+    }
+
+    .options {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+
+    }
+
+    button {
+        width: 40%;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .container {
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 2px 2px 20px 10px;
+    }
+
+    .question {
+        margin: 5px;
+        font-size: 30px;
+    }
+
+    .correct {
+
+        background-color: rgb(81, 219, 134);
+    }
+
+    .incorrect {
+        background-color: rgb(255, 59, 59);
+    }
+
+    .option {
+        width: 40%;
+        display: flex;
+        justify-content: center;
+
+    }
+</style>
+
+<body>
+
+    <header class="title">
+        <h2>Quiz Quiz Quiz</h2>
+
+    </header>
+
+    <section class="container">
+        <div class="question">who is the owner of bitcoin</div>
+        <div class="options">
+            <button class="option">option1</button>
+            <button class="option">option2</button>
+            <button class="option">option3</button>
+            <button class="option">option4</button>
+        </div>
+
+    </section>
+
+    <script>
+        const questions = [
+            {
+                question: "Who is the owner of bitcoin",
+                options: ["Elon", "Mark", "Jeff", "Satoshi"]
+            }
+
+        ]
+
+        var score = 0;
+
+        function createoption(option, answer = false) {
+
+            const optionholder = document.createElement("div");
+            optionholder.className = 'option';
+            const button = document.createElement('button');
+            button.innerHTML = option;
+
+            button.addEventListener('click', () => {
+                if (answer) {
+                    if (!button.classList.contains('correct')) {
+                        score++;
+                    }
+                    button.classList.add('correct')
+                }
+                else {
+                    button.classList.add("incorrect")
+                }
+            })
+            optionholder.append(button);
+            return optionholder;
+            console.log(this);
+
+
+        }
+
+        questions.forEach((element, index) => {
+            console.log(element, index);
+            console.log(element.options);
+            element.options.forEach((option) => { console.log(option) });
+
+            const container = document.createElement('section');
+            container.className = "container";
+
+            const question = document.createElement('div');
+            question.className = "question";
+            question.innerHTML = `${index + 1}. ${element.question}`;
+            container.append(question)
+
+            const options = document.createElement("div");
+            options.className = "options";
+
+            const optionarr = [];
+
+            // element.options.forEach((option, number) => {
+
+            //     if (number == 0) {
+            //         optionarr.push(createoption(option, true));
+
+            //     }
+            //     else {
+            //         optionarr.push(createoption(option));
+            //     }
+
+            // })
+
+            element.options.forEach((option, number) => {
+
+                if (number == 0) {
+                    var newop = createoption(option, true);
+
+                }
+                else {
+                    var newop = createoption(option);
+                }
+                options.append(newop);
+            })
+
+            // optionarr.forEach((option) => {
+            //     options.append(option);
+            // })
+
+            container.append(options);
+            document.body.append(container);
+
+
+        });
+    </script>
+
+</body>
+
+</html>

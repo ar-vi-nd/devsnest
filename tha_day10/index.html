@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .container {
+        overflow: auto;
+        background-color: aquamarine;
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+        grid-template-rows: repeat(4, auto);
+        /* grid-gap: 5rem; */
+        justify-content: space-evenly;
+        width: 80vw;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        row-gap: 50px;
+        /* column-gap: ; */
+    }
+
+    .box {
+        background-color: azure;
+        border: 3px solid burlywood;
+        width: 200px;
+        height: 100px;
+        position: relative;
+        text-align: center;
+        transition: transform 0.2s;
+        transform-style: preserve-3d;
+    }
+
+
+    .box:hover {
+        opacity: .9;
+    }
+
+    .front .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: purple;
+        box-shadow: 2px 2px 20px purple;
+        border-radius: 5px;
+        border: 1px solid grey;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+
+    }
+
+    .back {
+        background-color: red;
+        color: white;
+        transform: rotateY(180deg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .flipped {
+        transform: rotateY(180deg);
+    }
+</style>
+
+<body>
+    <section class="container">
+        <div class="box" id="box1">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box2">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box3">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box4">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box5">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box6">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box7">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box8">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box9">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box10">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box11">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box12">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box13">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box14">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box15">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="box" id="box16">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        let words = ["one", "two", "three", "four", "five", "six", "seven", "eight"];
+        words = [...words, ...words];
+
+        const back = Array.from(document.querySelectorAll(".back"))
+        console.log(back);
+        for (let i in back) {
+            console.log(i);
+            let rand = Math.floor(Math.random() * (15 - i));
+            back[i].innerHTML = "<h2>" + words[rand] + "</h2>";
+            console.log(rand);
+            words.splice(rand, 1);
+        }
+
+        const cards = Array.from(document.querySelectorAll(".box"));
+        for (let card of cards) {
+            card.addEventListener("click", (e) => {
+                if (clicked) {
+                    card.classList.add("flipped");
+                    setTimeout(() => {
+                        console.log(card);
+                        console.log(card.lastElementChild);
+                        console.log(card.lastChild)
+                        if (card.lastElementChild.innerHTML !== clicked.lastElementChild.innerHTML) {
+                            card.classList.remove("flipped");
+                            clicked.classList.remove("flipped");
+                        }
+                        else {
+                            card.style.visibility = "hidden";
+                            clicked.style.visibility = "hidden";
+                        }
+                        clicked = undefined;
+                    }, 500);
+                }
+
+                else {
+                    clicked = card;
+                    card.classList.add("flipped");
+                }
+
+            })
+
+        }
+
+        let clicked;
+
+
+    </script>
+
+</body>
+
+</html>
